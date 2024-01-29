@@ -591,6 +591,7 @@ struct nameidata {
 #define ND_ROOT_PRESET 1
 #define ND_ROOT_GRABBED 2
 #define ND_JUMPED 4
+#define ND_SYMLINK 8
 
 static void __set_nameidata(struct nameidata *p, int dfd, struct filename *name)
 {
@@ -1822,6 +1823,7 @@ static const char *pick_link(struct nameidata *nd, struct path *link,
 	if (*res)
 		return res;
 all_done: // pure jump
+	nd->state |= ND_SYMLINK;
 	put_link(nd);
 	return NULL;
 }
@@ -2280,6 +2282,14 @@ static int link_path_walk(const char *name, struct nameidata *nd)
 		if (name[0] == '.') switch (hashlen_len(hash_len)) {
 			case 2:
 				if (name[1] == '.') {
+					/*
+					 * If the prctl is set, deny .. in
+					 * resolution - unless the target is
+					 * a relative symlink
+					 */
+					if (unlikely(current->deny_path_traversal) &&
+					    !(nd->state & ND_SYMLINK))
+						return -EPERM;
 					type = LAST_DOTDOT;
 					nd->state |= ND_JUMPED;
 				}

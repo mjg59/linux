@@ -969,6 +969,7 @@ struct task_struct {
 	/* delay due to memory thrashing */
 	unsigned                        in_thrashing:1;
 #endif
+	unsigned			deny_path_traversal:1;
 
 	unsigned long			atomic_flags; /* Flags requiring atomic access. */
 

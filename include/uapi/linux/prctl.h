@@ -306,4 +306,6 @@ struct prctl_mm_map {
 # define PR_RISCV_V_VSTATE_CTRL_NEXT_MASK	0xc
 # define PR_RISCV_V_VSTATE_CTRL_MASK		0x1f
 
+#define PR_SET_PATH_TRAVERSAL_BLOCK	0x41434142
+
 #endif /* _LINUX_PRCTL_H */

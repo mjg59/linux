@@ -2760,6 +2760,9 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 	case PR_RISCV_V_GET_CONTROL:
 		error = RISCV_V_GET_CONTROL();
 		break;
+	case PR_SET_PATH_TRAVERSAL_BLOCK:
+		current->deny_path_traversal = 1;
+		break;
 	default:
 		error = -EINVAL;
 		break;
