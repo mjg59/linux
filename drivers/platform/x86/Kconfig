@@ -1022,6 +1022,16 @@ config SEL3350_PLATFORM
 	  To compile this driver as a module, choose M here: the module
 	  will be called sel3350-platform.
 
+config MDA6655_ACCEL
+	tristate "MDA6655 dual accelerometer"
+	depends on ACPI
+	depends on MXC4005
+	help
+	  Enables support for the MDA6655 dual accelerometer used to detect
+	  and control tablet mode on some ultraportable convertible machines.
+	  It requires the MXC4005 driver for interaction with the underlying
+	  accelerometers.
+
 config OXP_EC
 	tristate "OneXPlayer EC platform control"
 	depends on ACPI_EC
