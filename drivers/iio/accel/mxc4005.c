@@ -570,7 +570,6 @@ static DEFINE_SIMPLE_DEV_PM_OPS(mxc4005_pm_ops, mxc4005_suspend, mxc4005_resume)
 static const struct acpi_device_id mxc4005_acpi_match[] = {
 	{"MXC4005",	0},
 	{"MXC6655",	0},
-	{"MDA6655",	0},
 	{ }
 };
 MODULE_DEVICE_TABLE(acpi, mxc4005_acpi_match);
